@@ -47,6 +47,9 @@ export default function RootLayout({
     <html lang="ja" className={`${lora.variable} ${geistSans.variable} ${geistMono.variable} ${courierPrime.variable} ${orbitron.variable}`}>
       <body className="antialiased min-h-screen flex flex-col bg-background text-foreground transition-all duration-500">
         <ThemeProvider>
+          {/* Global Fixed Background Layer (Layer 2) */}
+          <div className="fixed inset-0 bg-google-ai -z-20 pointer-events-none" />
+
           {/* Header - Fixed height, clean for all devices */}
           <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container mx-auto flex h-16 items-center justify-between px-4">

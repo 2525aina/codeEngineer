@@ -59,7 +59,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative -mt-10 overflow-hidden min-h-screen bg-google-ai">
+    <div className="relative -mt-10 overflow-hidden min-h-screen">
       {/* Sticky Action Bar */}
       <div
         className={`fixed top-16 left-0 right-0 z-30 transition-all duration-500 transform ${isSticky

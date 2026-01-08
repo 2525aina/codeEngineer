@@ -27,12 +27,31 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem("font-theme", theme);
     };
 
-    // Apply class to document
+    // Apply font class to document
     useEffect(() => {
         const root = window.document.documentElement;
         root.classList.remove("font-lora", "font-geist", "font-retro", "font-sci-fi");
         root.classList.add(`font-${fontTheme}`);
     }, [fontTheme]);
+
+    // Handle Dark Mode based on system preference
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const handleChange = () => {
+            if (mediaQuery.matches) {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+        };
+
+        // Initial check
+        handleChange();
+
+        // Listen for changes
+        mediaQuery.addEventListener("change", handleChange);
+        return () => mediaQuery.removeEventListener("change", handleChange);
+    }, []);
 
     return (
         <ThemeContext.Provider value={{ fontTheme, setFontTheme }}>
