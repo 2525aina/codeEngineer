@@ -1,26 +1,151 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --primary: #3b82f6;
+  --secondary: #64748b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #050505;
+    /* Deeper black */
+    --foreground: #e2e8f0;
+    /* Softer off-white to reduce glare */
+    --secondary: #64748b;
+  }
+
+  /* Deep Subdued Dark Mode Background */
+  .bg-google-ai {
+    background: radial-gradient(circle at 50% -20%, rgba(66, 133, 244, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 0% 0%, rgba(30, 30, 30, 0.5) 0%, transparent 40%);
+    background-color: #000000 !important;
   }
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+pre,
+code {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --glow-primary: 0 0 20px rgba(59, 130, 246, 0.5);
+  --glow-secondary: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+@keyframes rainbow-rotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-rainbow {
+  animation: rainbow-rotate 10s linear infinite;
+}
+
+.animate-reveal {
+  animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.bg-google-ai {
+  background: radial-gradient(circle at 50% -20%, #4285f4 0%, transparent 60%),
+    radial-gradient(circle at 0% 0%, #34a853 0%, transparent 40%),
+    radial-gradient(circle at 100% 0%, #ea4335 0%, transparent 40%),
+    radial-gradient(circle at 100% 100%, #fbbc05 0%, transparent 40%);
+  background-color: #f8f9fa;
+}
+
+.dark .bg-google-ai {
+  background: radial-gradient(circle at 50% -20%, #4285f4 0%, transparent 60%),
+    radial-gradient(circle at 0% 0%, #1e1e1e 0%, transparent 40%);
+  background-color: #0c0c0e;
+}
+
+.text-google-gradient {
+  background: linear-gradient(135deg, #4285f4, #34a853, #fbbc05, #ea4335);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-move 5s ease infinite;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-shadow {
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+}
+
+
+.prose :not(pre)>code {
+  background-color: color-mix(in srgb, var(--foreground), transparent 90%);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* Markdown 内のコードブロックのスタイル */
+.prose pre {
+  background-color: #1e1e1e;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  color: #e5e7eb;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
