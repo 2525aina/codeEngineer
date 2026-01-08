@@ -267,11 +267,11 @@ export default function Home() {
 
       {/* Final CTA */}
       <section className="container mx-auto px-6 pb-32">
-        <div className="bg-white dark:bg-[#1e1e1e] rounded-[48px] p-12 md:p-24 text-center card-shadow border">
+        <div className="glass bg-google-ai rounded-[48px] p-12 md:p-24 text-center card-shadow border">
           <h2 className="text-4xl md:text-6xl font-medium mb-8">あなたの可能性を、<br />解き放つ。</h2>
           <Link
             href="/settings"
-            className="inline-block bg-[#1a73e8] text-white px-12 py-5 rounded-full font-bold text-xl hover:shadow-[0_8px_30px_rgb(66,133,244,0.4)] transition-all active:scale-95"
+            className="inline-block bg-[#1a73e8] text-white px-12 py-5 rounded-full font-bold text-xl hover:shadow-[0_8px_30px_rgb(66,133,244,0.4)] transition-all active:scale-95 shadow-lg"
           >
             開始
           </Link>
@@ -284,8 +284,8 @@ export default function Home() {
 
 function FeatureCard({ icon: Icon, title, desc }: { icon: LucideIcon, title: string, desc: string }) {
   return (
-    <div className="space-y-6 group">
-      <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+    <div className="glass bg-google-ai rounded-[32px] p-8 space-y-6 group border hover:border-primary/30 transition-all hover:-translate-y-1 duration-300">
+      <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors border border-white/5">
         <Icon className="w-6 h-6 text-primary" />
       </div>
       <h3 className="text-2xl font-bold">{title}</h3>
