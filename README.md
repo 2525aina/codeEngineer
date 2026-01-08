@@ -43,7 +43,7 @@ npm install
 ### 2. Firebase エミュレーターの起動
 別のターミナルで以下を実行します（モックデータベースが起動します）：
 ```bash
-npx firebase emulators:start --only firestore --project demo-problem-generator
+npx firebase emulators:start --only firestore --project demo-problem-generator --import=./firebase-data --export-on-exit
 ```
 
 ### 3. アプリケーションの起動

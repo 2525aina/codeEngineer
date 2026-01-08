@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Code2, ArrowRight, BookOpen, Zap, Settings2, Sparkles, ShieldCheck, Cpu, Globe, LucideIcon, Check, Copy, MessageSquare } from "lucide-react";
+import { Code2, Eye, ArrowRight, BookOpen, Zap, Settings2, Sparkles, ShieldCheck, Cpu, Globe, LucideIcon, Check, Copy, MessageSquare } from "lucide-react";
 
 export default function Home() {
   const [isSticky, setIsSticky] = useState(false);
@@ -222,8 +222,11 @@ export default function Home() {
                 <div className="text-xs font-mono bg-muted/50 p-3 rounded-xl border border-white/5 truncate">
                   id: aedb929f-3a6a...
                 </div>
-                <button className="w-full bg-primary/10 text-primary py-3 rounded-xl font-bold text-sm hover:bg-primary/20 transition-all">
-                  解決策を表示
+                <button className="w-full bg-primary/10 text-primary py-3 rounded-xl font-bold text-sm
+                   hover:bg-primary/20 transition-all
+                   flex items-center justify-center gap-2">
+                  <Eye className="w-5 h-5" />
+                  <span>解答と解説を見る</span>
                 </button>
               </div>
             </div>
