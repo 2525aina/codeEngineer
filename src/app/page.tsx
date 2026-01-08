@@ -6,6 +6,44 @@ import { Code2, ArrowRight, BookOpen, Zap, Settings2, Sparkles, ShieldCheck, Cpu
 
 export default function Home() {
   const [isSticky, setIsSticky] = useState(false);
+  const [heroContent, setHeroContent] = useState({
+    title: { line1: "コードを研げ。", line2: "知性を超えろ。" },
+    desc: { line1: "教科書を捨て、実務の修羅場へ。", line2: "「不可避の欠陥」を、あなたの腕でねじ伏せろ。" }
+  });
+
+  useEffect(() => {
+    // ランダムキャッチコピーのバリエーション
+    const variations = [
+      {
+        title: { line1: "コードを研げ。", line2: "知性を超えろ。" },
+        desc: { line1: "教科書を捨て、実務の修羅場へ。", line2: "「不可避の欠陥」を、あなたの腕でねじ伏せろ。" }
+      },
+      {
+        title: { line1: "そのコードで、", line2: "耐えられるか。" },
+        desc: { line1: "教科書通りの回答は、ここでは通用しない。", line2: "その「脆弱性」を、あなたは完全に見抜けるか。" }
+      },
+      {
+        title: { line1: "AIをデバッグせよ。", line2: "真実はバグの中に。" },
+        desc: { line1: "AIが生成するのは「正解」ではない、「罠」だ。", line2: "次世代のエンジニアに求められるのは、それを見破る力。" }
+      },
+      {
+        title: { line1: "綺麗事を書くな。", line2: "動くものを書け。" },
+        desc: { line1: "理論だけのアルゴリズム問題はもう終わり。", line2: "明日現場で直面するトラブルを、今日ここで解決しよう。" }
+      },
+      {
+        title: { line1: "実務直結。", line2: "バグ混入済み。" },
+        desc: { line1: "最強の教材は、失敗するコードだ。", line2: "その「設計ミス」こそが、あなたを強くする。" }
+      },
+      {
+        title: { line1: "AIが壊し、", line2: "人間が創る。" },
+        desc: { line1: "完全なコードなど存在しない。", line2: "AIが突きつける不完全さを、あなたの知性で補完せよ。" }
+      }
+    ];
+
+    // ハイドレーション不一致を防ぐため、マウント後にランダム設定
+    const random = variations[Math.floor(Math.random() * variations.length)];
+    setHeroContent(random);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,15 +103,25 @@ export default function Home() {
           <span>Next-gen AI Problem Engineering</span>
         </div>
 
-        <h1 className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-8 leading-[0.9] text-black dark:text-white animate-reveal">
-          <span className="text-google-gradient">コードを研げ。</span><br />
-          知性を超えろ。
+        {/* Title: 確実に2行で表示 */}
+        <h1 className="flex flex-col items-center justify-center w-full max-w-6xl mx-auto mb-8 animate-reveal min-h-[2em]">
+          <span className="text-[10vw] md:text-8xl lg:text-9xl font-black tracking-tighter leading-[1.0] text-google-gradient whitespace-nowrap italic">
+            {heroContent.title.line1}
+          </span>
+          <span className="text-[10vw] md:text-8xl lg:text-9xl font-black tracking-tighter leading-[1.0] text-black dark:text-white whitespace-nowrap">
+            {heroContent.title.line2}
+          </span>
         </h1>
 
-        <p className="text-lg md:text-2xl text-secondary max-w-2xl mb-14 leading-relaxed opacity-90 animate-reveal shrink-0">
-          教科書を捨て、実務の修羅場へ。<br className="hidden md:block" />
-          AIが突きつける「不可避の欠陥」を、あなたの腕でねじ伏せろ。
-        </p>
+        {/* Subtitle: 確実に2行で表示 */}
+        <div className="flex flex-col items-center justify-center w-full max-w-4xl mx-auto mb-14 animate-reveal min-h-[3.5em]">
+          <p className="text-[3.5vw] md:text-2xl text-secondary leading-relaxed opacity-90 whitespace-nowrap">
+            {heroContent.desc.line1}
+          </p>
+          <p className="text-[3.5vw] md:text-2xl text-secondary leading-relaxed opacity-90 whitespace-nowrap">
+            {heroContent.desc.line2}
+          </p>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-6 items-center animate-reveal">
           <Link
@@ -212,7 +260,7 @@ export default function Home() {
           <FeatureCard
             icon={Globe}
             title="パーソナライズ"
-            desc="難易度はチュートリアルから「魔王級」まで。文脈に合わせた追加指示も自在に設定可能。"
+            desc="難易度は「チュートリアル」から「魔王級」まで。文脈に合わせた追加指示も自在に設定可能。"
           />
         </div>
       </section>

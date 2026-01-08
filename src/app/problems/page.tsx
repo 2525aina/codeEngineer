@@ -94,11 +94,15 @@ export default function Problems() {
                             <Sparkles className="w-3 h-3" />
                             <span>Library</span>
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-black tracking-tight">アーカイブを<br /><span className="text-google-gradient">解体する</span></h1>
-                        <p className="text-secondary text-lg max-w-md">
-                            過去に生成された {problems.length} 件の難問。
-                            あなたの武器（スキル）を試す場所。
-                        </p>
+                        <h1 className="flex flex-col md:block">
+                            <span className="text-[10vw] md:text-6xl font-black tracking-tight whitespace-nowrap block">
+                                <span className="text-google-gradient italic">戦歴 </span>を、<span className="text-google-gradient italic">振り返る </span>。
+                            </span>
+                        </h1>
+                        <div className="text-secondary text-sm md:text-lg max-w-2xl mt-4">
+                            <p className="whitespace-nowrap overflow-visible">これまで挑んだ {problems.length} の戦場。</p>
+                            <p className="whitespace-nowrap overflow-visible">解決したバグの数だけ、あなたは強くなった。</p>
+                        </div>
                     </div>
 
                     <div className="flex flex-col gap-4 w-full md:w-auto">

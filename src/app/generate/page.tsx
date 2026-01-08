@@ -134,13 +134,15 @@ function GenerateContent() {
                         <Terminal className="w-3.5 h-3.5" />
                         <span>Problem Engineering Console</span>
                     </div>
-                    <h1 className="text-3xl md:text-7xl font-black tracking-tighter">
-                        新たな<span className="text-google-gradient italic">難問を錬成</span>する
+                    <h1 className="flex flex-col items-center justify-center w-full">
+                        <span className="text-[8vw] md:text-7xl font-black tracking-tighter whitespace-nowrap block">
+                            <span className="text-google-gradient italic">AI </span>に、<span className="text-google-gradient italic">挑戦状 </span>を送る。
+                        </span>
                     </h1>
-                    <p className="text-secondary text-sm md:text-lg max-w-2xl mx-auto opacity-80 leading-relaxed">
-                        あなたのスキルに合わせた最適な課題をAIがゼロから構築。<br className="hidden md:block" />
-                        技術スタックを選択し、AIへの指令を完成させろ。
-                    </p>
+                    <div className="text-secondary text-sm md:text-lg max-w-4xl mx-auto opacity-80 leading-relaxed mt-4 flex flex-col items-center">
+                        <p className="whitespace-nowrap w-full text-center text-[4vw] md:text-lg">AI が牙を剥く。あなたの技術スタックに合わせた</p>
+                        <p className="whitespace-nowrap w-full text-center text-[4vw] md:text-lg">「最悪のシナリオ（バグ）」を生成せよ。</p>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 px-4 md:px-0">
