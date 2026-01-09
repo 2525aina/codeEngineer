@@ -38,6 +38,8 @@ export default function Problems() {
         return (
             p.title.toLowerCase().includes(query) ||
             p.category.toLowerCase().includes(query) ||
+            p.difficulty.toLowerCase().includes(query) ||
+            p.context.toLowerCase().includes(query) ||
             p.techStack.some(t => t.toLowerCase().includes(query)) ||
             p.problemTypes.some(t => t.toLowerCase().includes(query))
         );
