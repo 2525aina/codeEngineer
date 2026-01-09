@@ -35,7 +35,20 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: "codeEngineer",
-  description: "AI-powered coding problem generator for developers.",
+  description: "開発者向けのコーディング問題ジェネレーター。",
+  openGraph: {
+    title: "codeEngineer",
+    description: "開発者向けのコーディング問題ジェネレーター。",
+    url: "https://code-engineer.vercel.app", // 仮のURL、適宜変更してください
+    siteName: "codeEngineer",
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "codeEngineer",
+    description: "開発者向けのコーディング問題ジェネレーター。",
+  },
 };
 
 export default function RootLayout({
