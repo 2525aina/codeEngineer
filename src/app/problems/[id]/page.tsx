@@ -106,9 +106,7 @@ export default function ProblemDetail() {
                         </h2>
                         <div className="prose dark:prose-invert max-w-none prose-code:before:content-none prose-code:after:content-none bg-muted/20 p-6 rounded-2xl border border-muted">
                             <ReactMarkdown components={markdownComponents}>
-                                {(problem.context || "")
-                                    .replace(/\\\*/g, '*')
-                                    .replace(/\*\*(.*?)\*\*/g, ' **$1** ')}
+                                {problem.context || ""}
                             </ReactMarkdown>
                         </div>
                     </section>
@@ -161,9 +159,7 @@ export default function ProblemDetail() {
                                     </h2>
                                     <div className="prose dark:prose-invert max-w-none prose-code:before:content-none prose-code:after:content-none bg-yellow-50/30 dark:bg-yellow-900/10 p-6 rounded-2xl border border-yellow-200/50">
                                         <ReactMarkdown components={markdownComponents}>
-                                            {(problem.explanation || "")
-                                                .replace(/\\\*/g, '*')
-                                                .replace(/\*\*(.*?)\*\*/g, ' **$1** ')}
+                                            {problem.explanation || ""}
                                         </ReactMarkdown>
                                     </div>
                                 </section>

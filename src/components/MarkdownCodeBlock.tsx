@@ -19,7 +19,8 @@ export default function MarkdownCodeBlock({ children, className }: MarkdownCodeB
     // ":" で分割して言語とファイル名を抽出
     const [language, filename] = fullLanguageInfo.split(":");
 
-    const code = String(children).replace(/\n$/, "");
+    // children が配列（React.ReactNode[]）の場合があるため、確実に文字列に変換
+    const code = (Array.isArray(children) ? children.join("") : String(children)).trim();
 
     const handleCopy = async () => {
         await navigator.clipboard.writeText(code);
