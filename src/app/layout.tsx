@@ -34,6 +34,7 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://code-engineer.vercel.app"),
   title: "codeEngineer",
   description: "開発者向けのコーディング問題ジェネレーター。",
   openGraph: {
