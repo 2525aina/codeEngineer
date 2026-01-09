@@ -44,6 +44,51 @@ function GenerateContent() {
         model: "gemini-2.5-flash-lite"
     });
 
+    // Loading transition states
+    const [loadingProgress, setLoadingProgress] = useState(0);
+    const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+
+    const LOADING_MESSAGES = [
+        "指示内容を解析中...",
+        "業務背景をシミュレート中...",
+        "AI 思考エンジンを駆動しています...",
+        "コードの脆弱性を設計中...",
+        "最適な解決策を構成中...",
+        "解答と解説を執筆しています...",
+        "生成データを最適化しています...",
+        "最終的な品質チェックを行っています..."
+    ];
+
+    useEffect(() => {
+        let progressInterval: NodeJS.Timeout;
+        let messageInterval: NodeJS.Timeout;
+
+        if (loading) {
+            setLoadingProgress(0);
+            setLoadingMessageIndex(0);
+
+            // Progress bar logic: fast at first, then slows down
+            progressInterval = setInterval(() => {
+                setLoadingProgress(prev => {
+                    if (prev < 30) return prev + 2; // Fast start
+                    if (prev < 70) return prev + 0.8; // Moderate
+                    if (prev < 95) return prev + 0.15; // Slow crawl
+                    return prev; // Stall at 95%
+                });
+            }, 200);
+
+            // Message rotation logic
+            messageInterval = setInterval(() => {
+                setLoadingMessageIndex(prev => (prev + 1) % LOADING_MESSAGES.length);
+            }, 3500);
+        }
+
+        return () => {
+            clearInterval(progressInterval);
+            clearInterval(messageInterval);
+        };
+    }, [loading]);
+
     const searchParams = useSearchParams();
     const modelParam = searchParams.get("model");
 
@@ -537,22 +582,61 @@ function GenerateContent() {
             {/* Global Loading Overlay */}
             {loading && (
                 <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-background/80 backdrop-blur-xl animate-in fade-in duration-500 pointer-events-auto">
-                    <div className="relative">
-                        <div className="w-24 h-24 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
-                        <Sparkles className="absolute inset-0 m-auto w-10 h-10 text-primary animate-pulse" />
+                    <div className="relative mb-8">
+                        {/* Outer Glow Ring */}
+                        <div className="absolute -inset-8 bg-primary/10 blur-3xl rounded-full animate-pulse" />
+
+                        {/* Main Spinner */}
+                        <div className="relative">
+                            <svg className="w-32 h-32 transform -rotate-90">
+                                <circle
+                                    cx="64"
+                                    cy="64"
+                                    r="60"
+                                    fill="transparent"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                    className="text-primary/10"
+                                />
+                                <circle
+                                    cx="64"
+                                    cy="64"
+                                    r="60"
+                                    fill="transparent"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                    strokeDasharray={377}
+                                    strokeDashoffset={377 - (377 * loadingProgress) / 100}
+                                    strokeLinecap="round"
+                                    className="text-primary transition-all duration-500 ease-out"
+                                />
+                            </svg>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <Sparkles className="w-10 h-10 text-primary animate-pulse" />
+                                <span className="text-xs font-black text-primary mt-1">{Math.floor(loadingProgress)}%</span>
+                            </div>
+                        </div>
                     </div>
-                    <div className="mt-8 space-y-4 text-center">
-                        <h2 className="text-2xl font-black tracking-tighter animate-bounce italic">
-                            AI IS <span className="text-google-gradient">THINKING</span> ...
-                        </h2>
-                        <div className="space-y-1">
-                            <p className="text-secondary text-sm font-bold uppercase tracking-widest opacity-60">
-                                問題を構築しています
-                            </p>
-                            <p className="text-secondary/50 text-[10px]">
-                                数十秒ほどかかる場合があります
+
+                    <div className="space-y-6 text-center max-w-xs px-4">
+                        <div className="h-10 flex items-center justify-center">
+                            <h2 className="text-xl font-bold tracking-tight animate-in fade-in slide-in-from-bottom-2 duration-1000 key={loadingMessageIndex}">
+                                {LOADING_MESSAGES[loadingMessageIndex]}
+                            </h2>
+                        </div>
+
+                        <div className="space-y-3">
+                            <div className="w-full bg-primary/10 rounded-full h-1 overflow-hidden">
+                                <div
+                                    className="bg-primary h-full transition-all duration-500 ease-out"
+                                    style={{ width: `${loadingProgress}%` }}
+                                />
+                            </div>
+                            <p className="text-secondary/50 text-[10px] font-bold uppercase tracking-[0.2em]">
+                                AI IS GENERATING YOUR CHALLENGE
                             </p>
                         </div>
+
                         <div className="flex items-center gap-2 justify-center text-[10px] font-mono text-primary/40 bg-primary/5 px-4 py-1.5 rounded-full border border-primary/10">
                             <span className="w-1.5 h-1.5 bg-primary rounded-full animate-ping" />
                             {options.model} connected
