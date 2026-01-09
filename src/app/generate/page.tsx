@@ -466,7 +466,7 @@ function GenerateContent() {
 
                             <div className="space-y-3">
                                 <h2 className="text-3xl md:text-4xl font-black tracking-tight text-black dark:text-white">
-                                    挑戦を<span className="text-google-gradient italic">開始</span>
+                                    🧑‍💻<span className="text-google-gradient italic">挑戦 </span>を<span className="text-google-gradient italic">開始 </span>🎌
                                 </h2>
                                 <p className="text-secondary text-sm font-medium">
                                     以下の条件で問題を生成します。よろしいですか？
