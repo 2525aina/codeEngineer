@@ -13,17 +13,31 @@ interface CodeBlockProps {
  * 言語とクリーンなコードを抽出する
  */
 function parseCodeFence(code: string): { language: string; cleanCode: string } {
-    // マークダウンのコードフェンスパターン: ```言語名\nコード\n```
-    const fencePattern = /^```(\w+)?\s*\n?([\s\S]*?)\n?```\s*$/;
-    const match = code.trim().match(fencePattern);
+    const trimmedCode = code.trim();
+
+    // 1. 完璧に囲まれているパターンをチェック
+    const fullFencePattern = /^```(\w+)?\s*\n?([\s\S]*?)\n?```\s*$/;
+    let match = trimmedCode.match(fullFencePattern);
 
     if (match) {
         const detectedLanguage = match[1] || "javascript";
         const cleanCode = match[2] || "";
-        return { language: detectedLanguage, cleanCode: cleanCode.trim() };
+        return { language: detectedLanguage.toLowerCase(), cleanCode: cleanCode.trim() };
     }
 
-    // コードフェンスがない場合はそのまま返す
+    // 2. 開始だけある、または末尾にゴミがあるパターンをより広範囲にチェック
+    // コードの途中に ```言語名 が混入している場合も考慮
+    const partialStartPattern = /```(\w+)?\s*\n?/;
+    const firstLineMatch = trimmedCode.match(partialStartPattern);
+
+    if (firstLineMatch) {
+        const detectedLanguage = firstLineMatch[1] || "javascript";
+        // 最初に出現する ```... から、最後に出現する ``` (あれば) までを抽出
+        let clean = trimmedCode.replace(/```(\w+)?\s*/g, ''); // すべてのコードフェンスマーカーを削除
+        return { language: detectedLanguage.toLowerCase(), cleanCode: clean.trim() };
+    }
+
+    // コードフェンスがない場合
     return { language: "javascript", cleanCode: code };
 }
 

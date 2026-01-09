@@ -40,8 +40,8 @@ function GenerateContent() {
         database: [],
         difficulty: "medium",
         problemTypes: ["バグ修正"],
-        customInstructions: "",
-        model: "gemini-2.0-flash-001"
+        customInstructions: "テスト時には気づきにくく運用が始まってから気づく無限ループの事故を学びたい。",
+        model: "gemini-2.5-flash-lite"
     });
 
     const searchParams = useSearchParams();
