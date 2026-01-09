@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState, ComponentPropsWithoutRef } from "react";
+import { useParams } from "next/navigation";
 import { getProblemById } from "@/app/actions/problem";
 import { CodingProblem } from "@/types";
 import CodeBlock from "@/components/CodeBlock";
@@ -13,18 +13,19 @@ import Link from "next/link";
 // ReactMarkdown のカスタムコンポーネント
 const markdownComponents = {
     // 太字を確実に強調。!重要フラグを使用して他のスタイルによる上書きを防止。
-    strong: ({ children }: any) => <strong className="!font-black !text-blue-600 dark:!text-blue-400">{children}</strong>,
-    b: ({ children }: any) => <b className="!font-black !text-blue-600 dark:!text-blue-400">{children}</b>,
+    strong: ({ children }: ComponentPropsWithoutRef<'strong'>) => <strong className="!font-black !text-blue-600 dark:!text-blue-400">{children}</strong>,
+    b: ({ children }: ComponentPropsWithoutRef<'b'>) => <b className="!font-black !text-blue-600 dark:!text-blue-400">{children}</b>,
 
     // リストのスタイリング
-    ul: ({ children }: any) => <ul className="list-disc pl-6 space-y-2 my-4">{children}</ul>,
-    ol: ({ children }: any) => <ol className="list-decimal pl-6 space-y-2 my-4">{children}</ol>,
-    li: ({ children }: any) => <li className="leading-relaxed">{children}</li>,
+    ul: ({ children }: ComponentPropsWithoutRef<'ul'>) => <ul className="list-disc pl-6 space-y-2 my-4">{children}</ul>,
+    ol: ({ children }: ComponentPropsWithoutRef<'ol'>) => <ol className="list-decimal pl-6 space-y-2 my-4">{children}</ol>,
+    li: ({ children }: ComponentPropsWithoutRef<'li'>) => <li className="leading-relaxed">{children}</li>,
 
     // コードブロックは pre レベルで処理してネスト問題を回避
-    pre: ({ children }: any) => {
+    pre: ({ children }: ComponentPropsWithoutRef<'pre'>) => {
         // children から code 要素の props を取得
-        const codeElement = children?.props;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const codeElement = (children as any)?.props;
         if (codeElement) {
             const className = codeElement.className || "";
             const code = String(codeElement.children || "");
@@ -33,7 +34,7 @@ const markdownComponents = {
         return <pre>{children}</pre>;
     },
     // code は pre 内で処理されるのでスキップ（インラインコードのみ処理）
-    code: ({ inline, className, children, ...props }: any) => {
+    code: ({ className, children, ...props }: ComponentPropsWithoutRef<'code'> & { inline?: boolean }) => {
         // インラインコードのプレミアムなスタイリング
         return (
             <code
@@ -48,7 +49,6 @@ const markdownComponents = {
 
 export default function ProblemDetail() {
     const { id } = useParams();
-    const router = useRouter();
     const [problem, setProblem] = useState<CodingProblem | null>(null);
     const [loading, setLoading] = useState(true);
     const [showAnswer, setShowAnswer] = useState(false);

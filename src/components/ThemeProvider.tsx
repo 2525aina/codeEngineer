@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-type FontTheme = "lora" | "geist" | "retro" | "sci-fi";
+export type FontTheme = "lora" | "geist" | "retro" | "sci-fi";
 
 interface ThemeContextType {
     fontTheme: FontTheme;
@@ -18,6 +18,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const saved = localStorage.getItem("font-theme") as FontTheme;
         if (saved && ["lora", "geist", "retro", "sci-fi"].includes(saved)) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setFontThemeState(saved);
         }
     }, []);

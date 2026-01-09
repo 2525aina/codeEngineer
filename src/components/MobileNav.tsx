@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Code2, List, PlusCircle, Settings2, Home as HomeIcon } from "lucide-react";
+import { List, PlusCircle, Settings2, Home as HomeIcon } from "lucide-react";
 
 export default function MobileNav() {
     const pathname = usePathname();

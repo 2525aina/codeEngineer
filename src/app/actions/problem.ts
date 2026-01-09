@@ -127,9 +127,9 @@ export async function generateAndSaveProblem(options: GenerationOptions) {
 
         revalidatePath("/problems");
         return { success: true, id: docRef.id };
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Generation error:", error);
-        throw new Error(error.message || "Failed to generate problem");
+        throw new Error(error instanceof Error ? error.message : "Failed to generate problem");
     }
 }
 

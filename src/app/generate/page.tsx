@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { generateAndSaveProblem } from "@/app/actions/problem";
-import { Category, Difficulty, GenerationOptions } from "@/types";
+import { Category, Difficulty, GenerationOptions, GeminiModel } from "@/types";
 import { MODELS } from "@/lib/gemini";
 import { Loader2, Sparkles, AlertCircle, Check, MessageSquare, Cpu, Terminal, Zap, Layers, ChevronDown, ChevronUp } from "lucide-react";
 
@@ -27,6 +27,17 @@ const PROBLEM_TYPES = [
     "パフォーマンス改善", "テスト設計", "非同期処理の問題"
 ];
 
+const LOADING_MESSAGES = [
+    "指示内容を解析中...",
+    "業務背景をシミュレート中...",
+    "AI 思考エンジンを駆動しています...",
+    "コードの脆弱性を設計中...",
+    "最適な解決策を構成中...",
+    "解答と解説を執筆しています...",
+    "生成データを最適化しています...",
+    "最終的な品質チェックを行っています..."
+];
+
 function GenerateContent() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
@@ -48,16 +59,7 @@ function GenerateContent() {
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
 
-    const LOADING_MESSAGES = [
-        "指示内容を解析中...",
-        "業務背景をシミュレート中...",
-        "AI 思考エンジンを駆動しています...",
-        "コードの脆弱性を設計中...",
-        "最適な解決策を構成中...",
-        "解答と解説を執筆しています...",
-        "生成データを最適化しています...",
-        "最終的な品質チェックを行っています..."
-    ];
+
 
     useEffect(() => {
         let progressInterval: NodeJS.Timeout;
@@ -94,7 +96,7 @@ function GenerateContent() {
 
     useEffect(() => {
         if (modelParam && MODELS.some(m => m.id === modelParam)) {
-            setOptions(prev => ({ ...prev, model: modelParam as any }));
+            setOptions(prev => ({ ...prev, model: modelParam as GeminiModel }));
         }
     }, [modelParam]);
 
@@ -128,7 +130,7 @@ function GenerateContent() {
             window.location.href = `/settings#model-${modelId}`;
             return;
         }
-        setOptions({ ...options, model: modelId as any });
+        setOptions({ ...options, model: modelId as GeminiModel });
     };
 
     const handleGenerate = () => {
@@ -164,8 +166,8 @@ function GenerateContent() {
             if (result.success) {
                 router.push(`/problems/${result.id}`);
             }
-        } catch (err: any) {
-            setError(err.message || "問題の生成に失敗しました。設定画面でAPIキーを確認してください。");
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "問題の生成に失敗しました。設定画面でAPIキーを確認してください。");
             setLoading(false);
         }
     };
@@ -554,7 +556,7 @@ function GenerateContent() {
                                             <span className="text-[10px] font-black text-primary tracking-widest uppercase">Custom Instructions</span>
                                         </div>
                                         <p className="text-[11px] text-secondary italic leading-relaxed">
-                                            "{options.customInstructions}"
+                                            &quot;{options.customInstructions}&quot;
                                         </p>
                                     </div>
                                 )}

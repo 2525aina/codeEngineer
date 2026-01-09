@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { FileCode, Copy, Check, ChevronRight } from "lucide-react";
+import { FileCode, Copy, Check } from "lucide-react";
 
 interface CodeFile {
     language: string;
@@ -28,7 +28,6 @@ function parseMultiFiles(input: string, defaultLang: string = "javascript"): Cod
     const fenceRegex = /```([\w-]+)?(?::([\w\.\/\-_ ]+))?\s*\n([\s\S]*?)\n```/g;
 
     let match;
-    let lastIndex = 0;
 
     while ((match = fenceRegex.exec(trimmed)) !== null) {
         const lang = (match[1] || defaultLang).toLowerCase();
@@ -36,7 +35,7 @@ function parseMultiFiles(input: string, defaultLang: string = "javascript"): Cod
         const code = match[3].trim();
 
         blocks.push({ language: lang, filename, code });
-        lastIndex = fenceRegex.lastIndex;
+        // fenceRegex.lastIndex is automatically updated
     }
 
     // コードブロックが1つも見つからなかった場合、全体を1つのファイルとして扱う

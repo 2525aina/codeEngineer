@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getProblems } from "@/app/actions/problem";
 import { CodingProblem } from "@/types";
 import Link from "next/link";
-import { Clock, Tag, ChevronRight, BookOpen, Search, Filter, Sparkles } from "lucide-react";
+import { Clock, Tag, ChevronRight, BookOpen, Search, Sparkles } from "lucide-react";
 
 export default function Problems() {
     const [problems, setProblems] = useState<CodingProblem[]>([]);
@@ -144,7 +144,7 @@ export default function Problems() {
                     </div>
                 ) : filteredProblems.length === 0 ? (
                     <div className="text-center py-20 bg-muted/20 rounded-[40px] border border-dashed border-muted">
-                        <p className="text-secondary font-bold">" {searchQuery} " に一致する問題は見つかりませんでした。</p>
+                        <p className="text-secondary font-bold">&quot; {searchQuery} &quot; に一致する問題は見つかりませんでした。</p>
                         <button onClick={() => setSearchQuery("")} className="mt-4 text-primary text-sm font-bold border-b border-primary/30 pb-0.5 hover:border-primary transition-all">
                             検索をリセット
                         </button>
@@ -209,7 +209,7 @@ export default function Problems() {
     );
 }
 
-function ArrowRight(props: any) {
+function ArrowRight(props: React.SVGProps<SVGSVGElement>) {
     return (
         <svg
             fill="none"

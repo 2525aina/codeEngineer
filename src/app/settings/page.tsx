@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { validateAndSaveApiKey, getSessionData, clearApiKeyForModel, clearAllApiKeys } from "@/app/actions/problem";
 import { MODELS } from "@/lib/gemini";
 import { Save, Trash2, CheckCircle, AlertCircle, ShieldCheck, Zap, Sparkles, Loader2, Cpu, ChevronRight, PlusCircle, Type, Check } from "lucide-react";
-import { useTheme } from "@/components/ThemeProvider";
+import { useTheme, FontTheme } from "@/components/ThemeProvider";
 
 export default function Settings() {
     const [apiKeys, setApiKeys] = useState<Record<string, string>>({});
@@ -70,8 +70,8 @@ export default function Settings() {
             setApiKeys(prev => ({ ...prev, [modelId]: "********" + rawKey.slice(-4) }));
             setSuccessMsg(`${modelId} の接続に成功しました。`);
             setTimeout(() => setSuccessMsg(null), 3000);
-        } catch (err: any) {
-            setError(prev => ({ ...prev, [modelId]: err.message || "接続に失敗しました。" }));
+        } catch (err: unknown) {
+            setError(prev => ({ ...prev, [modelId]: (err instanceof Error ? err.message : "接続に失敗しました。") }));
         } finally {
             setValidatingModel(null);
         }
@@ -104,8 +104,8 @@ export default function Settings() {
                 setSuccessMsg("すべてのモデルの接続が完了しました。");
             }
             setTimeout(() => setSuccessMsg(null), 5000);
-        } catch (err: any) {
-            setError(prev => ({ ...prev, bulk: err.message || "接続に失敗しました。" }));
+        } catch (err: unknown) {
+            setError(prev => ({ ...prev, bulk: (err instanceof Error ? err.message : "接続に失敗しました。") }));
         } finally {
             setIsBulkValidating(false);
         }
@@ -424,7 +424,8 @@ export default function Settings() {
     );
 }
 
-function FontOption({ id, name, font, description }: { id: any, name: string, font: string, description: string }) {
+
+function FontOption({ id, name, font, description }: { id: FontTheme, name: string, font: string, description: string }) {
     const { fontTheme, setFontTheme } = useTheme();
     const active = fontTheme === id;
 

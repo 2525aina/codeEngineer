@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI, SchemaType, Schema } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GenerationOptions, CodingProblem } from "@/types";
 
 export const MODELS: { id: string; name: string; tag: string; description: string }[] = [
@@ -11,42 +11,7 @@ export const MODELS: { id: string; name: string; tag: string; description: strin
     // { id: "gemini-2.0-thinking-exp-01-21", name: "2.0 Thinking (Preview)", tag: "思考型", description: "論理的思考プロセスを可視化する、研究者・上級者プロンプト用モデル。" },
 ];
 
-const schema: Schema = {
-    description: "Coding problem generation schema",
-    type: SchemaType.OBJECT,
-    properties: {
-        title: {
-            type: SchemaType.STRING,
-            description: "Title of the problem",
-        },
-        context: {
-            type: SchemaType.STRING,
-            description: "Business background and requirements (Markdown)",
-        },
-        problemCode: {
-            type: SchemaType.STRING,
-            description: "Problematic/Incomplete code for the user to solve",
-        },
-        solutionCode: {
-            type: SchemaType.STRING,
-            description: "The correct/fixed/final code",
-        },
-        language: {
-            type: SchemaType.STRING,
-            description: "The primary programming language used (e.g., typescript, python, go, rust, java, sql)",
-        },
-        explanation: {
-            type: SchemaType.STRING,
-            description: "Detailed explanation of the solution (Markdown)",
-        },
-        techStack: {
-            type: SchemaType.ARRAY,
-            items: { type: SchemaType.STRING },
-            description: "Actual technology stack used in this problem",
-        },
-    },
-    required: ["title", "context", "problemCode", "solutionCode", "language", "explanation", "techStack"],
-};
+
 
 export async function generateProblem(apiKey: string, options: GenerationOptions): Promise<CodingProblem> {
     const genAI = new GoogleGenerativeAI(apiKey);

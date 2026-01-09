@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Code2, Eye, ArrowRight, BookOpen, Zap, Settings2, Sparkles, ShieldCheck, Cpu, Globe, LucideIcon, Check, Copy, MessageSquare } from "lucide-react";
+import { ArrowRight, MessageSquare, LucideIcon, Eye, Check, Cpu, ShieldCheck, Globe } from "lucide-react";
 
 export default function Home() {
   const [isSticky, setIsSticky] = useState(false);
@@ -42,6 +42,7 @@ export default function Home() {
 
     // ハイドレーション不一致を防ぐため、マウント後にランダム設定
     const random = variations[Math.floor(Math.random() * variations.length)];
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHeroContent(random);
   }, []);
 
@@ -166,13 +167,13 @@ export default function Home() {
                   <span className="text-purple-400">public class</span> <span className="text-yellow-400">LogAnalyzer</span> {"{"}
                 </div>
                 <div className="flex gap-2 ml-4">
-                  <span className="text-blue-300">@PostMapping</span>(<span className="text-green-400">"/stats"</span>)
+                  <span className="text-blue-300">@PostMapping</span>(<span className="text-green-400">&quot;/stats&quot;</span>)
                 </div>
                 <div className="flex gap-2 ml-4 bg-primary/10 border-l-2 border-primary px-2 py-0.5 animate-pulse">
-                  <span className="text-red-400">// TODO: Calculate P99...</span>
+                  <span className="text-red-400">{/* // TODO: Calculate P99... */}</span>
                 </div>
                 <div className="flex gap-2 ml-4">
-                  <span className="text-secondary opacity-50 italic">// Logic here</span>
+                  <span className="text-secondary opacity-50 italic">{/* // Logic here */}</span>
                 </div>
                 <div className="flex gap-2">
                   {"}"}
