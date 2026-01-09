@@ -5,9 +5,9 @@ export const MODELS: { id: string; name: string; tag: string; description: strin
     { id: "gemini-3-pro-preview", name: "3 Pro (Preview)", tag: "最高峰", description: "次世代 Gemini 系の 高性能プレビュー版。高度な推論やコーディング能力を提供するモデル。" },
     { id: "gemini-3-flash-preview", name: "3 Flash (Preview)", tag: "次世代標準", description: "高速応答と十分な推論性能を両立した次世代 Flash 系モデル。" },
     { id: "gemini-2.5-pro", name: "2.5 Pro", tag: "高精度", description: "複雑な問題解決と長いコンテキスト処理に特化した高性能モデル。" },
+    { id: "gemini-2.5-flash-lite", name: "2.5 Flash Lite(無料版)", tag: "軽量", description: "コストを抑えて高速応答を実現する、軽量・高スループットモデル。" },
     { id: "gemini-2.5-flash", name: "2.5 Flash", tag: "高速", description: "速度と性能のバランスを極めた、大規模処理向けモデル。" },
     { id: "gemini-2.0-flash-001", name: "2.0 Flash", tag: "安定", description: "旧世代の安定モデル（新規開発では非推奨）。" },
-    { id: "gemini-2.5-flash-lite", name: "2.5 Flash Lite", tag: "軽量", description: "コストを抑えて高速応答を実現する、軽量・高スループットモデル。" },
     // { id: "gemini-2.0-thinking-exp-01-21", name: "2.0 Thinking (Preview)", tag: "思考型", description: "論理的思考プロセスを可視化する、研究者・上級者プロンプト用モデル。" },
 ];
 
@@ -46,7 +46,7 @@ const schema: Schema = {
 
 export async function generateProblem(apiKey: string, options: GenerationOptions): Promise<CodingProblem> {
     const genAI = new GoogleGenerativeAI(apiKey);
-    const selectedModel = options.model || "gemini-2.0-flash";
+    const selectedModel = options.model || "gemini-2.5-flash-lite";
 
     const model = genAI.getGenerativeModel({
         model: selectedModel,

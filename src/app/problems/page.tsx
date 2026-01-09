@@ -88,39 +88,39 @@ export default function Problems() {
                 </div>
 
                 {/* Header Section */}
-                <div className="relative overflow-hidden rounded-[40px] p-8 md:p-16 glass border animate-reveal">
-                    <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
-                        <div className="space-y-4 text-center md:text-left">
+                <div className="relative overflow-hidden rounded-[30px] md:rounded-[40px] p-6 md:p-10 lg:p-16 glass border animate-reveal">
+                    <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center lg:items-end gap-8">
+                        <div className="space-y-4 text-center lg:text-left w-full lg:w-auto">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold">
                                 <Sparkles className="w-3 h-3" />
                                 <span>Library</span>
                             </div>
-                            <h1 className="flex flex-col md:block">
-                                <span className="text-[10vw] md:text-6xl font-black tracking-tight whitespace-nowrap block">
+                            <h1 className="flex flex-col lg:block">
+                                <span className="text-[8vw] md:text-5xl lg:text-6xl font-black tracking-tight block">
                                     <span className="text-google-gradient italic">戦歴 </span>を、<span className="text-google-gradient italic">振り返る </span>。
                                 </span>
                             </h1>
-                            <div className="text-secondary text-sm md:text-lg max-w-2xl mt-4">
-                                <p className="whitespace-nowrap overflow-visible">これまで挑んだ {problems.length} の戦場。</p>
-                                <p className="whitespace-nowrap overflow-visible">解決したバグの数だけ、あなたは強くなった。</p>
+                            <div className="text-secondary text-sm md:text-base lg:text-lg max-w-2xl mt-4">
+                                <p>これまで挑んだ {problems.length} の戦場。</p>
+                                <p>解決したバグの数だけ、あなたは強くなった。</p>
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-4 w-full md:w-auto">
+                        <div className="flex flex-col sm:flex-row lg:flex-col gap-4 w-full lg:w-auto">
                             <Link
                                 href="/generate"
-                                className="bg-primary text-white px-8 py-4 rounded-2xl font-black text-center shadow-xl hover:scale-105 active:scale-95 transition-all text-sm md:text-base"
+                                className="bg-primary text-white px-8 py-4 rounded-2xl font-black text-center shadow-xl hover:scale-105 active:scale-95 transition-all text-sm md:text-base flex-1 lg:flex-none"
                             >
                                 生成する
                             </Link>
-                            <div className="relative group">
+                            <div className="relative group flex-1 lg:flex-none">
                                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary group-focus-within:text-primary transition-colors" />
                                 <input
                                     type="text"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     placeholder="タイトル、技術、タグで検索..."
-                                    className="w-full md:w-64 pl-12 pr-4 py-4 rounded-2xl bg-white/50 dark:bg-black/50 border border-white/20 focus:ring-2 focus:ring-primary outline-none text-sm transition-all"
+                                    className="w-full lg:w-72 pl-12 pr-4 py-4 rounded-2xl bg-white/50 dark:bg-black/50 border border-white/20 focus:ring-2 focus:ring-primary outline-none text-sm transition-all shadow-inner"
                                 />
                             </div>
                         </div>
