@@ -533,6 +533,33 @@ function GenerateContent() {
                     </div>
                 </div>
             )}
+
+            {/* Global Loading Overlay */}
+            {loading && (
+                <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-background/80 backdrop-blur-xl animate-in fade-in duration-500 pointer-events-auto">
+                    <div className="relative">
+                        <div className="w-24 h-24 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
+                        <Sparkles className="absolute inset-0 m-auto w-10 h-10 text-primary animate-pulse" />
+                    </div>
+                    <div className="mt-8 space-y-4 text-center">
+                        <h2 className="text-2xl font-black tracking-tighter animate-bounce italic">
+                            AI IS <span className="text-google-gradient">THINKING</span> ...
+                        </h2>
+                        <div className="space-y-1">
+                            <p className="text-secondary text-sm font-bold uppercase tracking-widest opacity-60">
+                                問題を構築しています
+                            </p>
+                            <p className="text-secondary/50 text-[10px]">
+                                数十秒ほどかかる場合があります
+                            </p>
+                        </div>
+                        <div className="flex items-center gap-2 justify-center text-[10px] font-mono text-primary/40 bg-primary/5 px-4 py-1.5 rounded-full border border-primary/10">
+                            <span className="w-1.5 h-1.5 bg-primary rounded-full animate-ping" />
+                            {options.model} connected
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 }
