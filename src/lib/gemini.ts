@@ -31,6 +31,10 @@ const schema: Schema = {
             type: SchemaType.STRING,
             description: "The correct/fixed/final code",
         },
+        language: {
+            type: SchemaType.STRING,
+            description: "The primary programming language used (e.g., typescript, python, go, rust, java, sql)",
+        },
         explanation: {
             type: SchemaType.STRING,
             description: "Detailed explanation of the solution (Markdown)",
@@ -41,7 +45,7 @@ const schema: Schema = {
             description: "Actual technology stack used in this problem",
         },
     },
-    required: ["title", "context", "problemCode", "solutionCode", "explanation", "techStack"],
+    required: ["title", "context", "problemCode", "solutionCode", "language", "explanation", "techStack"],
 };
 
 export async function generateProblem(apiKey: string, options: GenerationOptions): Promise<CodingProblem> {
@@ -108,6 +112,7 @@ ${options.customInstructions || 'なし'}
     "context": "...",
     "problemCode": "...", // ここには純粋なコードのみ
     "solutionCode": "...", // ここには純粋なコードのみ
+    "language": "...", // 使用言語（小文字、例: typescript）
     "explanation": "...",
     "techStack": ["...", "..."]
   }

@@ -8,12 +8,13 @@ export interface CodingProblem {
     techStack: string[];
     difficulty: Difficulty;
     problemTypes: string[];
+    language: string; // ← 追加：ハイライト用の言語名
     context: string;
     problemCode: string;
     solutionCode: string;
     explanation: string;
     createdAt: string;
-    options?: GenerationOptions; // 生成に使用された設定
+    options?: GenerationOptions;
 }
 
 export type GeminiModel =

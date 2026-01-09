@@ -119,7 +119,7 @@ export default function ProblemDetail() {
                             <FileCode className="w-6 h-6 text-orange-500" />
                             問題のコード
                         </h2>
-                        <CodeBlock code={problem.problemCode} />
+                        <CodeBlock code={problem.problemCode} language={problem.language} />
                     </section>
 
                     {/* Solution Toggle Section */}
@@ -151,7 +151,7 @@ export default function ProblemDetail() {
                                         <CheckCircle className="w-6 h-6" />
                                         正解・修正後のコード
                                     </h2>
-                                    <CodeBlock code={problem.solutionCode} />
+                                    <CodeBlock code={problem.solutionCode} language={problem.language} />
                                 </section>
 
                                 <section className="space-y-4">
